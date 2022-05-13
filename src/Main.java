@@ -38,9 +38,16 @@ public class Main {
             }
             if(choice==1){
 //    thêm danh bạ
-                System.out.println("nhập số điên thoại ");
-                scanner.nextLine();
-                String soDt=scanner.nextLine();
+                String phoneNumber = "";
+                while (true) {
+                    System.out.print("Nhập số điện thoại: ");
+                    String phoneNumberTemp = scanner.nextLine().trim();
+                    if (numberValidate.validate(phoneNumberTemp)) {
+                        phoneNumber = phoneNumberTemp;
+                        break;
+                    }
+                    System.out.println("Số điện thoại của bạn chưa đúng định dạng");
+                }
                 System.out.println("nhập ngày sinh");
                 int day= scanner.nextInt();
                 System.out.println("nhập tháng sinh");
@@ -56,10 +63,18 @@ public class Main {
                 String sex=scanner.nextLine();
                 System.out.println("nhập địa chỉ");
                 String address=scanner.nextLine();
-                System.out.println("nhập email");
-                String email=scanner.nextLine();
+                String email = "";
+                while (true) {
+                    System.out.print("Nhập email: ");
+                    String emailTemp = scanner.nextLine().trim();
+                    if (emailValidate.validate(emailTemp)) {
+                        email = emailTemp;
+                        break;
+                    }
+                    System.out.println("Email của bạn chưa đúng định dạng");
+                }
 
-                qldb.add(new DanhBa(soDt, LocalDate.of(year,motlh,day),name,group,sex,address,email));
+                qldb.add(new DanhBa(phoneNumber, LocalDate.of(year,motlh,day),name,group,sex,address,email));
             }
 
             else if(choice==2){
@@ -74,8 +89,16 @@ public class Main {
             }
             else if(choice==4){
 //    sửa
-                System.out.println("nhập số điên thoại");
-                String soDt1=scanner.nextLine();
+                String phoneNumber = "";
+                while (true) {
+                    System.out.print("Nhập số điện thoại: ");
+                    String phoneNumberTemp = scanner.nextLine().trim();
+                    if (numberValidate.validate(phoneNumberTemp)) {
+                        phoneNumber = phoneNumberTemp;
+                        break;
+                    }
+                    System.out.println("Số điện thoại của bạn chưa đúng định dạng");
+                }
                 System.out.println("nhập số điên thoại");
                 String soDt=scanner.nextLine();
                 System.out.println("nhập ngày sinh");
@@ -96,7 +119,7 @@ public class Main {
                 System.out.println("nhập email");
                 String email=scanner.nextLine();
                 DanhBa danhBa=new DanhBa(soDt,LocalDate.of(year,motlh,day),name,group,sex,address,email);
-                qldb.edit(soDt1,danhBa);
+                qldb.edit(phoneNumber,danhBa);
                 do {
                     System.out.print("Bạn muốn sửa tiếp không (y/n): ");
                     select = scanner.nextLine();
